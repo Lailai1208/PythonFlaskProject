@@ -1,0 +1,28 @@
+<!-- 因在 base.html 當中 有使用 jinjla模板 ，以base.html 當作基底，擴張成一個首頁的頁面 -->
+{% extends "base.html" %}
+
+<!-- 更改在base.html中的 title標籤屬性 -->
+{% block title %}Lai's website{% endblock %}
+
+<!-- 快速修改 base.html中的 div class="container" -->
+{% block content %}
+<h1 align="center">NOTES</h1>
+<ul class="list-group list-group-flush" id="notes">
+  {% for note in user.notes%}
+  <li class="list-group-item">
+    {{ note.data }}
+    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </li>
+  {% endfor %}
+</ul>
+<form method="POST">
+  <textarea name="note" id="note" class="form-control"></textarea>
+  <br />
+  <div align="center">
+    <button type="submit" class="btn btn-primary">添加筆記</button>
+  </div>
+</form>
+
+{% endblock%}
